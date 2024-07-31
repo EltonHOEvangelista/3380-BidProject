@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Header from './Header';
 
 const Bid = () => {
 
@@ -86,6 +87,7 @@ const Bid = () => {
 
     return (
         <>
+            <Header />
             <div className='bidContainer'>
               <div className='column'>
                 <div className='inner-div'>
