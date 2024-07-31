@@ -169,7 +169,7 @@ const Bid = () => {
                     .sort((a, b) => b.bidPrice - a.bidPrice) // Sort bids by highest price first
                     .map((bid, index) => (
                       <div key={index} className="bg-gray-100 p-2 rounded-2xl my-2">
-                        <p className={`font-bold ${index === 0 ? 'text-green-500 text-2xl' : 'text-red-500 text-xl'}`}>
+                        <p className={`font-bold ${index === 0 ? 'text-green-600 text-2xl' : 'text-red-500 text-xl'}`}>
                           {`Bid ${index + 1}: $${bid.bidPrice.toLocaleString()}`}
                         </p> {/* Conditionally styled bid price */}
                         <p className="text-sm text-gray-500">{`at ${new Date(bid.bidTime).toLocaleString()}`}</p>

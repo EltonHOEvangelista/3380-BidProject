@@ -43,10 +43,10 @@ const Home = () => {
                             <img src={vehicle.imgSrc} alt={vehicle.title} />
                         </div>
                         <div className="p-4 text-center">
-                            <h2 className="text-2xl font-semibold mb-2">{vehicle.title}</h2>
-                            <p className="text-xl font-bold text-gray-700 mb-2">${vehicle.price.toLocaleString('en-US')}</p>
-                            <p className="text-sm text-gray-500">{vehicle.year}</p>
-                            <p className="text-sm text-gray-500">{vehicle.mileage.toLocaleString('en-US')} km</p>
+                            <h2 className="text-4xl font-semibold mb-2">{vehicle.title}</h2>
+                            <p className="text-2xl font-bold text-green-600 mb-2">${vehicle.price.toLocaleString('en-US')}</p>
+                            <p className="text-xl text-gray-500">{vehicle.year}</p>
+                            <p className="text-xl text-gray-500">{vehicle.mileage.toLocaleString('en-US')} km</p>
                         </div>
                     </div>
                 ))}
@@ -56,6 +56,12 @@ const Home = () => {
 };
 
 export default Home;
+
+
+
+
+
+
 
 
 // const Home = () => {
