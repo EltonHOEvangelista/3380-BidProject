@@ -75,61 +75,164 @@ const AddVehicle = () => {
   };
 
   return (
-    <>
-      <Header />
+    <div class="flex justify-center items-center min-h-screen bg-gray-100 p-6">
+      <div class="bg-white shadow-xl rounded-2xl p-12 w-full max-w-5xl">
+        <h2 class="text-4xl font-bold text-blue-950 mb-10 text-center">Vehicle Details</h2>
+        <form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="flex flex-col">
+            <label for="vin" class="text-base font-medium text-gray-600">VIN</label>
+            <input
+              type="text"
+              name="vin"
+              id="vin"
+              class="mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Enter VIN"
+            />
+          </div>
 
-      <div class='bidContainer'>
-          <div class='column'>
-              <div class='inner-div'>
-                  <h2>Vehicle Details</h2>
-                  <div class='vehicle-details'>
-                      <form onSubmit={handleSubmit}>
-                          <label htmlFor="vin">VIN</label>
-                          <input type="text" name="vin" id="vin" value={vehicle.vin} onChange={handleChange} />
+          <div class="flex flex-col">
+            <label for="title" class="text-base font-medium text-gray-600">Title</label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              class="mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Enter Title"
+            />
+          </div>
 
-                          <label htmlFor="title">Title</label>
-                          <input type="text" name="title" id="title" value={vehicle.title} onChange={handleChange} />
+          <div class="flex flex-col">
+            <label for="maker" class="text-base font-medium text-gray-600">Maker</label>
+            <input
+              type="text"
+              name="maker"
+              id="maker"
+              class="mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Enter Maker"
+            />
+          </div>
 
-                          <label htmlFor="maker">Maker</label>
-                          <input type="text" name="maker" id="maker" value={vehicle.maker} onChange={handleChange} />
+          <div class="flex flex-col">
+            <label for="model" class="text-base font-medium text-gray-600">Model</label>
+            <input
+              type="text"
+              name="model"
+              id="model"
+              class="mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Enter Model"
+            />
+          </div>
 
-                          <label htmlFor="model">Model</label>
-                          <input type="text" name="model" id="model" value={vehicle.model} onChange={handleChange} />
+          <div class="flex flex-col">
+            <label for="year" class="text-base font-medium text-gray-600">Year</label>
+            <input
+              type="number"
+              name="year"
+              id="year"
+              class="mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Enter Year"
+            />
+          </div>
 
-                          <label htmlFor="year">Year</label>
-                          <input type="number" name="year" id="year" value={vehicle.year} onChange={handleChange} />
+          <div class="flex flex-col">
+            <label for="color" class="text-base font-medium text-gray-600">Color</label>
+            <input
+              type="text"
+              name="color"
+              id="color"
+              class="mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Enter Color"
+            />
+          </div>
 
-                          <label htmlFor="color">Color</label>
-                          <input type="text" name="color" id="color" value={vehicle.color} onChange={handleChange} />
+          <div class="flex flex-col">
+            <label for="engineType" class="text-base font-medium text-gray-600">Engine Type</label>
+            <input
+              type="text"
+              name="engineType"
+              id="engineType"
+              class="mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Enter Engine Type"
+            />
+          </div>
 
-                          <label htmlFor="engineType">Engine Type</label>
-                          <input type="text" name="engineType" id="engineType" value={vehicle.engineType} onChange={handleChange} />
+          <div class="flex flex-col">
+            <label for="transmission" class="text-base font-medium text-gray-600">Transmission</label>
+            <input
+              type="text"
+              name="transmission"
+              id="transmission"
+              class="mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Enter Transmission"
+            />
+          </div>
 
-                          <label htmlFor="transmission">Transmission</label>
-                          <input type="text" name="transmission" id="transmission" value={vehicle.transmission} onChange={handleChange} />
+          <div class="flex flex-col">
+            <label for="mileage" class="text-base font-medium text-gray-600">Mileage</label>
+            <input
+              type="number"
+              name="mileage"
+              id="mileage"
+              class="mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Enter Mileage"
+            />
+          </div>
 
-                          <label htmlFor="mileage">Mileage</label>
-                          <input type="number" name="mileage" id="mileage" value={vehicle.mileage} onChange={handleChange} />
+          <div class="flex flex-col">
+            <label for="location" class="text-base font-medium text-gray-600">Location</label>
+            <input
+              type="text"
+              name="location"
+              id="location"
+              class="mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Enter Location"
+            />
+          </div>
 
-                          <label htmlFor="location">Location</label>
-                          <input type="text" name="location" id="location" value={vehicle.location} onChange={handleChange} />
+          <div class="flex flex-col">
+            <label for="price" class="text-base font-medium text-gray-600">Price</label>
+            <input
+              type="number"
+              name="price"
+              id="price"
+              class="mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Enter Price"
+            />
+          </div>
 
-                          <label htmlFor="description">Description</label>
-                          <input type="text" name="description" id="description" value={vehicle.description} onChange={handleChange} />
+          <div class="flex flex-col">
+            <label for="imgSrc" class="text-base font-medium text-gray-600">{fileName}</label>
+            <input
+              type="file"
+              name="imgSrc"
+              id="imgSrc"
+              onChange={handleFileChange}
+              class="mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Enter Image Path"
+            />
+          </div>
+          <div class="flex flex-col lg:col-span-3">
+            <label for="description" class="text-base font-medium text-gray-600">Description</label>
+            <textarea
+              name="description"
+              id="description"
+              class="mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              rows="4"
+              placeholder="Enter Description"
+            ></textarea>
+          </div>
 
-                          <label htmlFor="price">Price</label>
-                          <input type="number" name="price" id="price" value={vehicle.price} onChange={handleChange} />
-
-                          <input type="file" name="imgSrc" id="imgSrc" onChange={handleFileChange} />
-                          <label htmlFor="imgSrc">{fileName}</label>
-                          
-                          <button type="submit" name="addVehicle">Add Vehicle</button>
-                      </form>
-                  </div>
-              </div>
+          <div class="flex justify-center md:col-span-2 lg:col-span-3">
+            <button
+              type="submit"
+              name="addVehicle"
+              class="bg-blue-950 hover:bg-blue-900 text-white font-semibold py-4 px-10 rounded-md shadow-md transition duration-300"
+            >
+              Add Vehicle
+            </button>
           </div>
       </div>
-    </>
+    </div>
   );
 };
 
