@@ -21,6 +21,8 @@ const AddVehicle = () => {
     bids: []
   });
 
+  const [fileName, setFileName] = useState('Choose File');
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setVehicle(prevState => ({
@@ -29,8 +31,22 @@ const AddVehicle = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setVehicle(prevState => ({
+        ...prevState,
+        imgSrc: reader.result
+      }));
+      setFileName(file.name);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     axios.post('http://localhost:5000/addvehicle', vehicle)
       .then(response => {
         console.log('Vehicle added:', response.data);
@@ -50,6 +66,7 @@ const AddVehicle = () => {
           imgSrc: '',
           bids: []
         });
+        setFileName('Choose File');
       })
       .catch(error => {
         console.error('There was an error adding the item!', error);
@@ -183,16 +200,16 @@ const AddVehicle = () => {
           </div>
 
           <div class="flex flex-col">
-            <label for="imgSrc" class="text-base font-medium text-gray-600">Image Path</label>
+            <label for="imgSrc" class="text-base font-medium text-gray-600">{fileName}</label>
             <input
-              type="text"
+              type="file"
               name="imgSrc"
               id="imgSrc"
+              onChange={handleFileChange}
               class="mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               placeholder="Enter Image Path"
             />
           </div>
-
           <div class="flex flex-col lg:col-span-3">
             <label for="description" class="text-base font-medium text-gray-600">Description</label>
             <textarea

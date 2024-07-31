@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Header from './Header';
 
 const Bid = () => {
 
@@ -19,6 +20,9 @@ const Bid = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // State to keep track of the highest bid
+    const [highestBid, setHighestBid] = useState(0);
+
     useEffect(() => {
       axios.get(`http://localhost:5000/bid/${vin}`)
           .then(response => {
@@ -32,6 +36,16 @@ const Bid = () => {
             setLoading(false);
           });
     }, [vin]);
+
+    //Calculate the highest bid whenever the bids array is updated
+    useEffect(() => {
+      if (bids.length > 0) {
+        const maxBid = Math.max(...bids.map(bid => bid.bidPrice));
+        setHighestBid(maxBid);
+      } else {
+        setHighestBid(0); // Default to 0 if no bids are available
+      }
+    });
   
     const handleChange = (e) => {
       const { name, value } = e.target;
@@ -73,6 +87,7 @@ const Bid = () => {
 
     return (
         <>
+            <Header />
             <div className='bidContainer'>
               <div className='column'>
                 <div className='inner-div'>
@@ -118,8 +133,9 @@ const Bid = () => {
                   <h1>Bid</h1>
                   <p>Submit your top bid</p>
                   <form onSubmit={handleSubmit}>
-                    <label htmlFor="currentBid">Current Bid</label>
-                    <input type="number" name="currentBid" id="currentBid" value={vehicle.price} disabled/>
+                    <label htmlFor="currentBid">Best Bid</label>
+                    {/* <input type="number" name="currentBid" id="currentBid" value={vehicle.price} disabled/> */}
+                    <input type="number" name="currentBid" id="currentBid" value={highestBid} disabled />
 
                     <label htmlFor="bidPrice">Your Bid</label>
                     <input type="number" name="bidPrice" id="bidPrice" value={bid.bidPrice} onChange={handleChange}/>
@@ -129,9 +145,38 @@ const Bid = () => {
                 </div>
                 <div className='inner-div'>
                   <h2>Bid Records</h2>
-                  {bids.map((bid, index) => (
+                  {/* {bids.map((bid, index) => (
                             <p key={index}>{`Bid ${index + 1}: $${bid.bidPrice} at ${new Date(bid.bidTime).toLocaleString()}`}</p>
-                        ))}
+                        ))} */}
+
+                  {/* {bids
+                    .sort((a, b) => b.bidPrice - a.bidPrice)
+                    .map((bid, index) => (
+                      <p key={index}>{`Bid ${index + 1}: $${bid.bidPrice} at ${new Date(bid.bidTime).toLocaleString()}`}</p>
+                    ))} */}
+
+                  {/* {bids
+                    .sort((a, b) => b.bidPrice - a.bidPrice) // Sort bids by highest price first
+                    .map((bid, index) => (
+                      <div key={index} className="bg-gray-100 p-2 rounded-2xl my-2">
+                        <p className="text-lg font-medium">{`Bid ${index + 1}: $${bid.bidPrice}`}</p>
+                        <p className="text-sm text-gray-500">{`at ${new Date(bid.bidTime).toLocaleString()}`}</p>
+                      </div>
+                  ))}    */}
+
+                  <div className="space-y-2">
+                  {bids
+                    .sort((a, b) => b.bidPrice - a.bidPrice) // Sort bids by highest price first
+                    .map((bid, index) => (
+                      <div key={index} className="bg-gray-100 p-2 rounded-2xl my-2">
+                        <p className={`font-bold ${index === 0 ? 'text-green-600 text-2xl' : 'text-red-500 text-xl'}`}>
+                          {`Bid ${index + 1}: $${bid.bidPrice.toLocaleString()}`}
+                        </p> {/* Conditionally styled bid price */}
+                        <p className="text-sm text-gray-500">{`at ${new Date(bid.bidTime).toLocaleString()}`}</p>
+                      </div>
+                    ))}
+                  </div>
+
                 </div>
               </div>
             </div>
