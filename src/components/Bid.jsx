@@ -17,9 +17,6 @@ const Bid = () => {
 
     const [bids, setBids] = useState([]);
 
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
     // State to keep track of the highest bid
     const [highestBid, setHighestBid] = useState(0);
 
@@ -28,12 +25,9 @@ const Bid = () => {
           .then(response => {
             setVehicle(response.data);
             setBids(response.data.bids || []);
-            setLoading(false);
           })
           .catch(error => {
             console.error('Error fetching data:', error);
-            setError('Error fetching data');
-            setLoading(false);
           });
     }, [vin]);
 
@@ -42,11 +36,11 @@ const Bid = () => {
       if (bids.length > 0) {
         const maxBid = Math.max(...bids.map(bid => bid.bidPrice));
         setHighestBid(maxBid);
-      } else {
-        setHighestBid(0); // Default to 0 if no bids are available
+      } else if (vehicle) {
+        setHighestBid(vehicle.price); // Set to vehicle's price if no bids are available and vehicle data is present
       }
-    });
-  
+    }, [bids, vehicle]);
+    
     const handleChange = (e) => {
       const { name, value } = e.target;
       setBid(prevState => ({
@@ -79,10 +73,6 @@ const Bid = () => {
 
     if (!vehicle) {
       return <div>Loading...</div>;
-    }
-
-    if (error) {
-      return <div>{error}</div>;
     }
 
     return (
@@ -134,7 +124,6 @@ const Bid = () => {
                   <p>Submit your top bid</p>
                   <form onSubmit={handleSubmit}>
                     <label htmlFor="currentBid">Best Bid</label>
-                    {/* <input type="number" name="currentBid" id="currentBid" value={vehicle.price} disabled/> */}
                     <input type="number" name="currentBid" id="currentBid" value={highestBid} disabled />
 
                     <label htmlFor="bidPrice">Your Bid</label>
@@ -145,25 +134,6 @@ const Bid = () => {
                 </div>
                 <div className='inner-div'>
                   <h2>Bid Records</h2>
-                  {/* {bids.map((bid, index) => (
-                            <p key={index}>{`Bid ${index + 1}: $${bid.bidPrice} at ${new Date(bid.bidTime).toLocaleString()}`}</p>
-                        ))} */}
-
-                  {/* {bids
-                    .sort((a, b) => b.bidPrice - a.bidPrice)
-                    .map((bid, index) => (
-                      <p key={index}>{`Bid ${index + 1}: $${bid.bidPrice} at ${new Date(bid.bidTime).toLocaleString()}`}</p>
-                    ))} */}
-
-                  {/* {bids
-                    .sort((a, b) => b.bidPrice - a.bidPrice) // Sort bids by highest price first
-                    .map((bid, index) => (
-                      <div key={index} className="bg-gray-100 p-2 rounded-2xl my-2">
-                        <p className="text-lg font-medium">{`Bid ${index + 1}: $${bid.bidPrice}`}</p>
-                        <p className="text-sm text-gray-500">{`at ${new Date(bid.bidTime).toLocaleString()}`}</p>
-                      </div>
-                  ))}    */}
-
                   <div className="space-y-2">
                   {bids
                     .sort((a, b) => b.bidPrice - a.bidPrice) // Sort bids by highest price first
