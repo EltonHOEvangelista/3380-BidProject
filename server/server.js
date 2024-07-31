@@ -77,7 +77,20 @@ router.route('/addvehicle')
         }
     });
 
-//Load all vehicles
+// //Load all vehicles
+// router.route("/")
+//     .get((req, res) => {
+//         VehicleModel.find()
+//             .then((vehicles) => res.json(vehicles.map(vehicle => ({
+//                 vin: vehicle.vin,
+//                 title: vehicle.title,
+//                 price: vehicle.price,
+//                 imgSrc: vehicle.imgSrc
+//                 }))))
+//             .catch((err) => res.status(400).json("Error: " + err));
+//     });
+
+//Load all vehicles (added year and mileage)
 router.route("/")
     .get((req, res) => {
         VehicleModel.find()
@@ -85,10 +98,13 @@ router.route("/")
                 vin: vehicle.vin,
                 title: vehicle.title,
                 price: vehicle.price,
-                imgSrc: vehicle.imgSrc
+                imgSrc: vehicle.imgSrc,
+                year: vehicle.year,
+                mileage: vehicle.mileage,
                 }))))
             .catch((err) => res.status(400).json("Error: " + err));
     });
+
 
 //Load vehicle details and bid placing
 router.route("/bid/:vin")

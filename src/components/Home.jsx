@@ -24,14 +24,18 @@ const Home = () => {
     }
 
     return (
-        <div className="vehicleContainer">
+        <div className="vehicleContainer rounded-2xl">
             {vehicles.map((vehicle, index) => (
-                <div key={index} className="inner-div" onClick={() => handleClick(vehicle)}>
+                <div key={index} className="inner-div cursor-pointer" onClick={() => handleClick(vehicle)}>
                     <img src={vehicle.imgSrc} alt={vehicle.title} />
                     <div className="text">
                         <h1>{vehicle.title}</h1>
-                        <h2>{vehicle.price}</h2>
+                        <h2>${vehicle.price.toLocaleString()}</h2>
                     </div>
+                    {/* <div className="p-4 text-center">
+                        <h2 className="text-2xl font-semibold mb-2">{vehicle.title}</h2>
+                        <p className="text-xl font-bold text-gray-700 mb-2">${vehicle.price.toLocaleString('en-US')}</p>
+                    </div> */}
                 </div>
             ))}
         </div>
