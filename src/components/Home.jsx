@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 
-
 const Home = () => {
     const navigate = useNavigate();
 
@@ -16,7 +15,7 @@ const Home = () => {
     };
 
     useEffect(() => {
-        axios.get('http://localhost:5000/')
+        axios.get(`${import.meta.env.VITE_API_BASE_URL}/`)
             .then(response => setVehicles(response.data))
             .catch(error => console.error('Error fetching data:', error));
     }, []);
@@ -56,47 +55,3 @@ const Home = () => {
 };
 
 export default Home;
-
-
-
-
-
-
-
-
-// const Home = () => {
-
-//     const navigate = useNavigate();
-
-//     const [vehicles, setVehicles] = useState(null);
-
-//     const handleClick = (vehicle) => {
-//         navigate(`/bid/${vehicle.vin}`, { state: { vehicle } });
-//     };
-
-//     useEffect(() => {
-//         axios.get('http://localhost:5000/')
-//             .then(response => setVehicles(response.data))
-//             .catch(error => console.error('Error fetching data:', error));
-//     }, []);
-
-//     if (!vehicles) {
-//         return <div>Loading...</div>;
-//     }
-
-//     return (
-//         <div className="vehicleContainer rounded-2xl">
-//             {vehicles.map((vehicle, index) => (
-//                 <div key={index} className="inner-div cursor-pointer" onClick={() => handleClick(vehicle)}>
-//                     <img src={vehicle.imgSrc} alt={vehicle.title}/>
-//                     <div className="text">
-//                         <h1>{vehicle.title}</h1>
-//                         <h2>${vehicle.price.toLocaleString()}</h2>
-//                     </div>
-//                 </div>
-//             ))}
-//         </div>
-//     );
-// };
-
-// export default Home;

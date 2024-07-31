@@ -48,7 +48,7 @@ const AddVehicle = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    axios.post('http://localhost:5000/addvehicle', vehicle)
+    axios.post(`${import.meta.env.VITE_API_BASE_URL}/addvehicle`, vehicle)
       .then(response => {
         console.log('Vehicle added:', response.data);
         setVehicle({

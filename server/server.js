@@ -9,14 +9,14 @@ import bodyParser from 'body-parser';
 
 // setups
 const app = express();
-const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
 
-//Database Uri
-const mongoUri = "mongodb+srv://quiz02:project%402024@cluster0.pzf1d2h.mongodb.net/autompDB";
+// Use the environment variables
+const port = process.env.PORT || 5000;
+const mongoUri = process.env.DB_URI;
 
 //Database connection
 mongoose.connect(mongoUri)
@@ -77,19 +77,6 @@ router.route('/addvehicle')
         }
     });
 
-// //Load all vehicles
-// router.route("/")
-//     .get((req, res) => {
-//         VehicleModel.find()
-//             .then((vehicles) => res.json(vehicles.map(vehicle => ({
-//                 vin: vehicle.vin,
-//                 title: vehicle.title,
-//                 price: vehicle.price,
-//                 imgSrc: vehicle.imgSrc
-//                 }))))
-//             .catch((err) => res.status(400).json("Error: " + err));
-//     });
-
 //Load all vehicles (added year and mileage)
 router.route("/")
     .get((req, res) => {
@@ -104,7 +91,6 @@ router.route("/")
                 }))))
             .catch((err) => res.status(400).json("Error: " + err));
     });
-
 
 //Load vehicle details and bid placing
 router.route("/bid/:vin")

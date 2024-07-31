@@ -21,7 +21,7 @@ const Bid = () => {
     const [highestBid, setHighestBid] = useState(0);
 
     useEffect(() => {
-      axios.get(`http://localhost:5000/bid/${vin}`)
+      axios.get(`${import.meta.env.VITE_API_BASE_URL}/bid/${vin}`)  //`http://localhost:5000/bid/${vin}`
           .then(response => {
             setVehicle(response.data);
             setBids(response.data.bids || []);
@@ -57,7 +57,7 @@ const Bid = () => {
         bidTime: new Date()
       };
       
-      axios.put(`http://localhost:5000/bid/${vin}`, newBid)
+      axios.put(`${import.meta.env.VITE_API_BASE_URL}/bid/${vin}`, newBid)
         .then(response => {
           console.log('Bid placed:', response.data);
           setBid({
