@@ -1,6 +1,7 @@
 //AddVehicle.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
+import Header from './Header';
 
 const AddVehicle = () => {
 
@@ -74,7 +75,9 @@ const AddVehicle = () => {
   };
 
   return (
-    <div class="flex justify-center items-center min-h-screen bg-gray-100 p-6">
+    <>
+      <Header />
+      <div class="flex justify-center items-center min-h-screen bg-gray-100 p-6">
       <div class="bg-white shadow-xl rounded-2xl p-12 w-full max-w-5xl">
         <h2 class="text-4xl font-bold text-blue-950 mb-10 text-center">Vehicle Details</h2>
         <form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -233,6 +236,8 @@ const AddVehicle = () => {
         </form>
       </div>
     </div>
+    </>
+
   );
 };
 
